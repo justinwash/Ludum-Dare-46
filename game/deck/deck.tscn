@@ -7,23 +7,34 @@
 script = ExtResource( 1 )
 
 [node name="Card" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card2" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card3" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card4" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card5" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card6" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card7" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card8" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card9" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card10" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="Card11" parent="." instance=ExtResource( 2 )]
+visible = false

@@ -8,6 +8,7 @@
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1024.0
 margin_bottom = 608.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,6 +19,7 @@ margin_left = 176.0
 margin_top = 48.0
 margin_right = 848.0
 margin_bottom = 552.0
+mouse_filter = 2
 color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -30,10 +32,12 @@ __meta__ = {
 [node name="Lane1" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 208.0
 margin_right = 304.0
+mouse_filter = 2
 
 [node name="Lane2" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 336.0
 margin_right = 432.0
+mouse_filter = 2
 
 [node name="Lane3" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 464.0

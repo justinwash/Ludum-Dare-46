@@ -24,6 +24,7 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0.392157 )
 position = Vector2( 304, 592 )
 scale = Vector2( 0.435255, 0.435255 )
+z_as_relative = false
 texture = ExtResource( 2 )
 
 [node name="Slot2" type="Sprite" parent="Hand"]
