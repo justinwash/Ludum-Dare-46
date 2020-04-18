@@ -18,3 +18,5 @@ z_index = 1
 z_as_relative = false
 
 [node name="Opponent" parent="." instance=ExtResource( 1 )]
+
+[editable path="Board"]

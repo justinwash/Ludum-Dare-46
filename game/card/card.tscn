@@ -7,6 +7,7 @@
 extents = Vector2( 104, 152 )
 
 [node name="Card" type="KinematicBody2D"]
+scale = Vector2( 0.435, 0.435 )
 input_pickable = true
 script = ExtResource( 1 )
 

@@ -1,19 +1,26 @@
 extends Node2D
 
-var slots
-var cards
+onready var slots = $Slots
+onready var cards = $Cards
 
 onready var deck = get_node("../Deck")
 
 func _ready():
-	slots = $Slots.get_children()
-	cards = $Cards.get_children()
-	
-	for i in range(0, len(cards)):
-			cards[i].position = slots[i].position
+	for i in range(0, cards.get_child_count()):
+			cards.get_children()[i].position = slots.get_children()[i].position
 		
 func _physics_process(_delta):
 	pass
 	
-func _add_card():
-	pass
+func draw_card():
+	if deck.cards.get_child_count() > 0 and self.cards.get_child_count() < 5:
+		var card = deck.cards.get_child(0)
+		deck.cards.remove_child(card)
+		self.cards.add_child(card)
+		card.set_owner(self.cards)
+		
+		card.input_pickable = true
+		card.z_index = 1
+		
+		for i in range(0, cards.get_child_count()):
+			cards.get_children()[i].position = slots.get_children()[i].position

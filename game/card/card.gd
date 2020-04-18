@@ -1,9 +1,13 @@
 extends KinematicBody2D
 
-# Pickable needs to be selected from the inspector
+signal holding_card
+signal dropped_card
 
 var can_grab = false
 var grabbed_offset = Vector2()
+var drag_origin
+var pressed = false
+var process_drop = true
 
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
@@ -12,4 +16,15 @@ func _input_event(viewport, event, shape_idx):
 
 func _process(delta):
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and can_grab:
+		pressed = true
+		if !drag_origin:
+			drag_origin = position
 		position = get_global_mouse_position() + grabbed_offset
+		emit_signal("holding_card", self)
+	if process_drop:
+		if !Input.is_mouse_button_pressed(BUTTON_LEFT) and pressed:
+			pressed = false
+			emit_signal("dropped_card", self)
+			if drag_origin:
+				set_scale(Vector2(0.435, 0.435))
+				position = drag_origin

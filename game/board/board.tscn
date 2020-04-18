@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://utilities/finitestatemachine/statemachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://board/lane/lane.tscn" type="PackedScene" id=2]
+[ext_resource path="res://board/board.gd" type="Script" id=3]
 
 [node name="Board" type="Node"]
+script = ExtResource( 3 )
 
 [node name="Background" type="ColorRect" parent="."]
 margin_right = 1024.0
@@ -32,12 +34,10 @@ __meta__ = {
 [node name="Lane1" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 208.0
 margin_right = 304.0
-mouse_filter = 2
 
 [node name="Lane2" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 336.0
 margin_right = 432.0
-mouse_filter = 2
 
 [node name="Lane3" parent="Lanes" instance=ExtResource( 2 )]
 margin_left = 464.0

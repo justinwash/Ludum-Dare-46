@@ -18,16 +18,16 @@ __meta__ = {
 position = Vector2( -344, -88 )
 
 [node name="Slot1" parent="Slots" instance=ExtResource( 2 )]
-position = Vector2( 384, 456 )
+position = Vector2( 354.521, 411.151 )
 
 [node name="Slot2" parent="Slots" instance=ExtResource( 2 )]
-position = Vector2( 384, 352 )
+position = Vector2( 354.521, 307.151 )
 
 [node name="Slot3" parent="Slots" instance=ExtResource( 2 )]
-position = Vector2( 384, 248 )
+position = Vector2( 354.521, 203.151 )
 
 [node name="Slot4" parent="Slots" instance=ExtResource( 2 )]
-position = Vector2( 384, 144 )
+position = Vector2( 354.521, 99.1512 )
 
 [node name="Meter" type="Node2D" parent="."]
 position = Vector2( -344, -88 )
@@ -111,3 +111,7 @@ color = Color( 0, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="Slots/Slot1"]
+
+[editable path="Slots/Slot2"]
