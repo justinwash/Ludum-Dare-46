@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://utilities/finitestatemachine/finitestatemachine.gd" type="Script" id=1]
+[ext_resource path="res://game.gd" type="Script" id=2]
+[ext_resource path="res://game/states/init.gd" type="Script" id=3]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 1 )
+ACTOR = NodePath("..")
+START_STATE = NodePath("Init")
+
+[node name="Init" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
