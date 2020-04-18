@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://utilities/finitestatemachine/statemachine.tscn" type="PackedScene" id=1]
+[ext_resource path="res://board/lane/lane.tscn" type="PackedScene" id=2]
+
+[node name="Board" type="Node"]
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 608.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayArea" type="ColorRect" parent="."]
+margin_left = 176.0
+margin_top = 48.0
+margin_right = 848.0
+margin_bottom = 552.0
+color = Color( 0.0823529, 0.0823529, 0.0823529, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StateMachine" parent="." instance=ExtResource( 1 )]
+
+[node name="Lanes" type="Node" parent="."]
+
+[node name="Lane1" parent="Lanes" instance=ExtResource( 2 )]
+margin_left = 208.0
+margin_right = 304.0
+
+[node name="Lane2" parent="Lanes" instance=ExtResource( 2 )]
+margin_left = 336.0
+margin_right = 432.0
+
+[node name="Lane3" parent="Lanes" instance=ExtResource( 2 )]
+margin_left = 464.0
+margin_right = 560.0
+
+[node name="Lane4" parent="Lanes" instance=ExtResource( 2 )]
+margin_left = 592.0
+margin_right = 688.0
+
+[node name="Lane5" parent="Lanes" instance=ExtResource( 2 )]
+margin_left = 720.0
+margin_right = 816.0
