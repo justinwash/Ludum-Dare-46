@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://utilities/finitestatemachine/statemachine.tscn" type="PackedScene" id=1]
 [ext_resource path="res://card/placeholders/placeholder-open.png" type="Texture" id=2]
 [ext_resource path="res://player/opponent.gd" type="Script" id=3]
 [ext_resource path="res://player/Hand.gd" type="Script" id=4]
 [ext_resource path="res://player/deck.tscn" type="PackedScene" id=5]
-[ext_resource path="res://player/discard.tscn" type="PackedScene" id=6]
 
 [node name="Opponent" type="Node2D"]
 script = ExtResource( 3 )
@@ -28,9 +27,6 @@ START_STATE = NodePath("../../Opponent/StateMachine/Init")
 [node name="Deck" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1080, -88 )
 AI = true
-
-[node name="Discard" parent="." instance=ExtResource( 6 )]
-position = Vector2( -152, -88 )
 
 [node name="Hand" type="Node2D" parent="."]
 script = ExtResource( 4 )

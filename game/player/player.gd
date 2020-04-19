@@ -6,6 +6,8 @@ onready var opponent = get_node(opponent_node)
 export(NodePath) var board_node
 onready var board = get_node(board_node)
 
+onready var game = get_parent()
+
 var held_card
 
 var is_turn = false
@@ -21,6 +23,7 @@ func _ready():
 		var _dropped_card = card.connect("dropped_card", self, "_dropped_card")
 		
 func _process(_delta):
+	game.set_cards_label(2 - played_cards)
 	if is_turn and played_cards > 1:
 		played_cards = 0
 		end_turn()

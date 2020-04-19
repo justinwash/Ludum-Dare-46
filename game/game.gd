@@ -6,9 +6,14 @@ onready var turn_count_label = $Camera/UI/TurnsCount
 var lane_count = 5
 onready var lane_count_label = $Camera/UI/LanesCount
 
+var cards_count = 2
+onready var cards_label = $Camera/UI/CardsCount
+
 onready var player = $Player
 onready var opponent = $Opponent
 onready var board = $Board
+
+onready var win_lose = $Camera/UI/WinLose
 
 func _ready():
 	player.connect("end_turn", self, "_increment_turn_count")
@@ -41,13 +46,32 @@ func _lane_lost():
 func _full_board():
 	_end_game("full_board")
 	
+func set_cards_label(count):
+	cards_count = count
+	cards_label.text = str(cards_count)
+	if cards_count < 2:
+		_enter_danger_mode(cards_label)
+	else:
+		cards_label.set("custom_colors/font_color",Color(0,255,0))
+	
 func _end_game(reason):
 	if reason == "turn limit":
 		print("game ended: turn limit - you win!")
+		win_lose.get_node("Win").visible = true
+		win_lose.get_node("Lose").visible = false
 	elif reason == "full board":
 		print("game ended: full board - you might win.")
 	elif reason == "lanes lost":
 		print("game ended: connection lost - you lose")
+		win_lose.get_node("Lose").visible = true
+		win_lose.get_node("Win").visible = false
 	else:
 		print("game ended: for no reason?")
 	get_tree().paused = true
+
+func _on_Quit_button_up():
+	get_tree().quit()
+
+func _on_Again_button_up():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
