@@ -34,6 +34,8 @@ position = Vector2( 354.521, 99.1512 )
 [node name="Meter" type="Node2D" parent="."]
 position = Vector2( -344, -88 )
 
+[node name="Timer" type="Timer" parent="."]
+
 [editable path="Slots/Slot1"]
 
 [editable path="Slots/Slot2"]

@@ -12,11 +12,13 @@ var process_drop = true
 export var side = "player"
 
 onready var effects = $Effects
-
+onready var player = get_node("../../../")
+	
 func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton:
-		can_grab = event.pressed
-		grabbed_offset = position - get_global_mouse_position()
+	if player.is_turn:
+		if event is InputEventMouseButton:
+			can_grab = event.pressed
+			grabbed_offset = position - get_global_mouse_position()
 
 func _process(delta):
 	if Input.is_mouse_button_pressed(BUTTON_LEFT) and can_grab and owner.name == "Cards":

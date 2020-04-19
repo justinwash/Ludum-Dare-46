@@ -21,6 +21,8 @@ func _ready():
 	board.connect("lane_lost", self, "_lane_lost")
 	board.connect("full_board", self, "_full_board")
 	
+	get_tree().paused = false
+	
 	
 func _physics_process(delta):
 	turn_count_label.text = str(turn_count + 1) + " / 15"
@@ -44,7 +46,7 @@ func _lane_lost():
 	_enter_danger_mode(lane_count_label)
 	
 func _full_board():
-	_end_game("full_board")
+	_end_game("full board")
 	
 func set_cards_label(count):
 	cards_count = count
@@ -61,6 +63,20 @@ func _end_game(reason):
 		win_lose.get_node("Lose").visible = false
 	elif reason == "full board":
 		print("game ended: full board - you might win.")
+		var player_slots = 0
+		var opp_slots = 0
+		for slot in board.slots:
+			if str(slot) != "[Deleted Object]":
+				if slot.status_good:
+					player_slots += 1
+				else:
+					opp_slots += 1
+		if player_slots >=  opp_slots:
+			win_lose.get_node("Win").visible = true
+			win_lose.get_node("Lose").visible = false
+		else:
+			win_lose.get_node("Lose").visible = true
+			win_lose.get_node("Win").visible = false
 	elif reason == "lanes lost":
 		print("game ended: connection lost - you lose")
 		win_lose.get_node("Lose").visible = true

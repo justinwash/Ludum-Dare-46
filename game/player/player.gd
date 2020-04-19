@@ -29,15 +29,28 @@ func _process(_delta):
 		end_turn()
 	
 func _holding_card(card):
-	if !held_card:
-		held_card = card
+	if is_turn:
+		if !held_card:
+			held_card = card
 		
 func _dropped_card(card):
 	held_card = null
 
 func _on_Opponent_end_turn():
+	var open_slots = get_open_slots()
+	if len(open_slots) == 0:
+		emit_signal("end_game", self, "full board")
+		return
 	hand.draw_to_five()
 	is_turn = true
+	
+func get_open_slots():
+	var open_slots = []
+	for slot in board.slots:
+		if str(slot) != "[Deleted Object]":
+			if slot.get_node("./Card").get_child_count() == 0:
+				open_slots.append(slot)
+	return open_slots
 	
 func end_turn():
 	is_turn = false

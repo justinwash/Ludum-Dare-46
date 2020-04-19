@@ -13,6 +13,7 @@ var played_cards = 0
 
 onready var hand = $Hand
 onready var game = get_parent()
+onready var timer = $Timer
 
 signal end_turn
 signal end_game
@@ -26,16 +27,21 @@ func _physics_process(_delta):
 
 func play_turn(num_cards, open_slots):
 	for i in range(0, num_cards):
-		play_one(open_slots)
+		timer.connect("timeout", self, "play_one", [open_slots, num_cards])
+		timer.set_wait_time(0.5)
+		timer.start()
 	 
-func play_one(open_slots):
+func play_one(open_slots, num_cards):
 	var chosen_slot = null
 	while !chosen_slot:
 		var slot = get_random_slot(open_slots)
-		if slot && slot.card.get_child_count() == 0:
+		if slot && str(slot) != "[Deleted Object]" && slot.card.get_child_count() == 0:
 			chosen_slot = slot
 			chosen_slot.accept_card(hand.cards.get_child(0))
 			played_cards += 1
+			if played_cards >= num_cards:
+				timer.disconnect("timeout", self, "play_one")
+				end_turn()
 			break
 		print("slot taken")
 	
@@ -52,9 +58,8 @@ func _on_Player_end_turn():
 			emit_signal("end_game", "full board")
 			return
 		else:
-			play_one(open_slots)
-		end_turn()
-	
+			play_turn(1, open_slots)
+		
 func get_open_slots():
 	var open_slots = []
 	for slot in board.slots:
@@ -83,5 +88,5 @@ func _on_Game_game_loaded():
 	if len(open_slots) >= 3:
 		play_turn(3, open_slots)
 	else:
-		play_one(open_slots)
+		play_turn(1, open_slots)
 	end_turn()

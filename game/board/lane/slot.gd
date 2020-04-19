@@ -56,9 +56,21 @@ func accept_card(card):
 		player.played_cards += 1
 	else:
 		set_status_good(false)
+		
+	var open_slots = get_open_slots()
+	if len(open_slots) == 0:
+		board.emit_signal("full_board")
 	
 	do_effects(card_to_add)
 		
+func get_open_slots():
+	var open_slots = []
+	for slot in board.slots:
+		if str(slot) != "[Deleted Object]":
+			if slot.get_node("./Card").get_child_count() == 0:
+				open_slots.append(slot)
+	return open_slots
+	
 func set_status_good(status):
 	if status:
 		status_good = true
@@ -99,11 +111,3 @@ func do_effects(card):
 				var card_to_remove = slot_should_remove.card.get_child(0)
 				if card_to_remove.side != card.side:
 					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
-					
-func get_open_slots():
-	var open_slots = []
-	for slot in board.slots:
-		if str(slot) != "[Deleted Object]":
-			if slot.get_node("./Card").get_child_count() == 0:
-				open_slots.append(slot)
-	return open_slots
