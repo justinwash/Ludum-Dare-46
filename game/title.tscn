@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/JetBrainsMono-ExtraBold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://popups/title.png" type="Texture" id=2]
+[ext_resource path="res://title.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="Title" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 1032.0
+margin_bottom = 608.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Sprite" parent="Control"]
+position = Vector2( 514.456, 310.812 )
+texture = ExtResource( 2 )
+
+[node name="Synopsis" type="RichTextLabel" parent="Control"]
+margin_left = 199.505
+margin_top = 191.0
+margin_right = 843.505
+margin_bottom = 506.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "AGENT [REDACTED],
+
+As the last surviving member of [REDACTED] you are hereby tasked with the following mission:
+
+The alien threat has destroyed or commandeered all but one remaining U.B.C.S. (Unmanned Battlecruiser Class Starship). We are confident that this ship can hold off the ongoing invasion, but our opponents are already working to defeat our connection to the cruiser and control if for themselves.
+
+If the connection is lost, Earth is theirs.
+
+	Keep it alive."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Control"]
+margin_left = 464.0
+margin_top = 535.921
+margin_right = 560.0
+margin_bottom = 555.921
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="Control/Button" to="." method="_on_Button_button_up"]
