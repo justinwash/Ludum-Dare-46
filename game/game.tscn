@@ -13,10 +13,16 @@ script = ExtResource( 2 )
 
 [node name="Board" parent="." instance=ExtResource( 6 )]
 
+[node name="Opponent" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -56 )
+z_index = 1
+player_node = NodePath("../Player")
+
 [node name="Player" parent="." instance=ExtResource( 3 )]
 z_index = 1
 z_as_relative = false
-
-[node name="Opponent" parent="." instance=ExtResource( 1 )]
+opponent_node = NodePath("../Opponent")
+[connection signal="end_turn" from="Opponent" to="Player" method="_on_Opponent_end_turn"]
+[connection signal="end_turn" from="Player" to="Opponent" method="_on_Player_end_turn"]
 
 [editable path="Board"]

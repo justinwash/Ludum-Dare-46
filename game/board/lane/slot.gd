@@ -19,10 +19,16 @@ func _on_Area2D_mouse_exited():
 func _physics_process(_delta):
 	if incoming_card and !Input.is_mouse_button_pressed(BUTTON_LEFT):
 		if card.get_child_count() < 1:
-			incoming_card.owner.remove_child(incoming_card)
-			self.card.add_child(incoming_card)
-			incoming_card.set_owner(self.card)
-			incoming_card.input_pickable = false
-			incoming_card.set_scale(Vector2(1, 1))
-			incoming_card.position = Vector2(0, 0)
-			player.held_card = null
+			accept_card(incoming_card)
+
+func accept_card(card):
+	var card_to_add = card
+	card = null
+	card_to_add.owner.remove_child(card_to_add)
+	self.card.add_child(card_to_add)
+	card_to_add.set_owner(self.card)
+	card_to_add.input_pickable = false
+	card_to_add.set_scale(Vector2(1, 1))
+	card_to_add.position = Vector2(0, 0)
+	player.held_card = null
+	player.played_cards += 1
