@@ -20,5 +20,15 @@ position = Vector2( 99.1811, 148.174 )
 shape = SubResource( 1 )
 
 [node name="Card" type="Node2D" parent="."]
+
+[node name="Indicator" type="ColorRect" parent="."]
+margin_left = 230.562
+margin_top = 8.10139
+margin_right = 250.562
+margin_bottom = 287.101
+color = Color( 0, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://board/lane/lane.gd" type="Script" id=1]
 [ext_resource path="res://board/lane/Slot.tscn" type="PackedScene" id=2]
 
 [node name="Lane" type="ColorRect"]
@@ -10,6 +11,7 @@ margin_bottom = 512.0
 rect_pivot_offset = Vector2( 24, 112 )
 mouse_filter = 2
 color = Color( 0.168627, 0.164706, 0.164706, 1 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,86 +33,6 @@ position = Vector2( 354.521, 99.1512 )
 
 [node name="Meter" type="Node2D" parent="."]
 position = Vector2( -344, -88 )
-
-[node name="StatusBad1" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 416.0
-margin_right = 432.0
-margin_bottom = 496.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusOK1" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 416.0
-margin_right = 432.0
-margin_bottom = 496.0
-color = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusBad2" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 312.0
-margin_right = 432.0
-margin_bottom = 392.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusOK2" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 312.0
-margin_right = 432.0
-margin_bottom = 392.0
-color = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusBad3" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 208.0
-margin_right = 432.0
-margin_bottom = 288.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusOK3" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 208.0
-margin_right = 432.0
-margin_bottom = 288.0
-color = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusBad4" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 104.0
-margin_right = 432.0
-margin_bottom = 184.0
-color = Color( 1, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusOK4" type="ColorRect" parent="Meter"]
-margin_left = 424.0
-margin_top = 104.0
-margin_right = 432.0
-margin_bottom = 184.0
-color = Color( 0, 1, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [editable path="Slots/Slot1"]
 

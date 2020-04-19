@@ -9,6 +9,10 @@ var drag_origin
 var pressed = false
 var process_drop = true
 
+export var side = "player"
+
+onready var effects = $Effects
+
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		can_grab = event.pressed

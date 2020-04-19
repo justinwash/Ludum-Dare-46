@@ -1,12 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/opponent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game.gd" type="Script" id=2]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://utilities/finitestatemachine/statemachine.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shaders/ScanLine.shader" type="Shader" id=5]
 [ext_resource path="res://board/board.tscn" type="PackedScene" id=6]
 
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/lines_distance = 4.0
+shader_param/pixel_size = 2.0
+shader_param/size_screen = 600.0
+shader_param/scanline_alpha = 0.9
+shader_param/lines_velocity = 30.0
+
 [node name="Game" type="Node2D"]
+material = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="StateMachine" parent="." instance=ExtResource( 4 )]
@@ -17,6 +27,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, -56 )
 z_index = 1
 player_node = NodePath("../Player")
+board_node = NodePath("../Board")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 z_index = 1

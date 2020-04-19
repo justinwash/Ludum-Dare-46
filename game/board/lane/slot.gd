@@ -1,9 +1,25 @@
 extends Sprite
 
+onready var player_node = get_node("../../../../../Player")
+
 var player
 var incoming_card
-onready var card = $Card
 
+var good_color = Color(0,255,0)
+var bad_color = Color(255,0,0)
+var status_good = true
+
+onready var card = $Card
+onready var lane = int(owner.get_name().substr(4))
+onready var slot = int(get_name().substr(4))
+onready var board = owner.get_owner()
+
+func _ready():
+	var _player_turn_end = player_node.connect("end_turn", self, "_player_turn_end")
+	
+func _player_turn_end():
+	incoming_card = null
+	
 func _on_Area2D_mouse_entered():
 	if player.held_card:
 		player.held_card.set_scale(Vector2(0.3, 0.3))
@@ -13,22 +29,73 @@ func _on_Area2D_mouse_entered():
 func _on_Area2D_mouse_exited():
 	if player.held_card:
 		player.held_card.set_scale(Vector2(0.435, 0.435))
-		incoming_card.process_drop = true
+		if incoming_card:
+			incoming_card.process_drop = true
 		incoming_card = null
 		
 func _physics_process(_delta):
 	if incoming_card and !Input.is_mouse_button_pressed(BUTTON_LEFT):
 		if card.get_child_count() < 1:
 			accept_card(incoming_card)
+		else:
+			incoming_card = null
 
 func accept_card(card):
 	var card_to_add = card
 	card = null
-	card_to_add.owner.remove_child(card_to_add)
+	if card_to_add.owner:
+		card_to_add.owner.remove_child(card_to_add)
 	self.card.add_child(card_to_add)
 	card_to_add.set_owner(self.card)
 	card_to_add.input_pickable = false
 	card_to_add.set_scale(Vector2(1, 1))
 	card_to_add.position = Vector2(0, 0)
-	player.held_card = null
-	player.played_cards += 1
+	if card_to_add.side == "player":
+		set_status_good(true)
+		player.held_card = null
+		player.played_cards += 1
+	else:
+		set_status_good(false)
+	
+	do_effects(card_to_add)
+		
+func set_status_good(status):
+	if status:
+		status_good = true
+		$Indicator.color = good_color
+	else:
+		status_good = false
+		$Indicator.color = bad_color
+		
+func do_effects(card):
+	if card.effects.left:
+		var slot_should_remove = get_node("../../../Lane"+str(lane-1)+"/Slots/Slot"+str(slot))
+		if slot_should_remove:
+			if slot_should_remove.card.get_child_count() > 0:
+				var card_to_remove = slot_should_remove.card.get_child(0)
+				if card_to_remove.side != card.side:
+					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+			
+	if card.effects.up:
+		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot+1))
+		if slot_should_remove:
+			if slot_should_remove.card.get_child_count() > 0:
+				var card_to_remove = slot_should_remove.card.get_child(0)
+				if card_to_remove.side != card.side:
+					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+		
+	if card.effects.right:
+		var slot_should_remove = get_node("../../../Lane"+str(lane+1)+"/Slots/Slot"+str(slot))
+		if slot_should_remove:
+			if slot_should_remove.card.get_child_count() > 0:
+				var card_to_remove = slot_should_remove.card.get_child(0)
+				if card_to_remove.side != card.side:
+					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+			
+	if card.effects.down:
+		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot-1))
+		if slot_should_remove:
+			if slot_should_remove.card.get_child_count() > 0:
+				var card_to_remove = slot_should_remove.card.get_child(0)
+				if card_to_remove.side != card.side:
+					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))

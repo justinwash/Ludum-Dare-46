@@ -20,7 +20,7 @@ func _ready():
 	end_turn()
 		
 func _process(_delta):
-	if played_cards > 2:
+	if played_cards > 1:
 		played_cards = 0
 		end_turn()
 	
