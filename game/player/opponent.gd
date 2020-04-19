@@ -1,5 +1,8 @@
 extends Node2D
 
+var process = false
+var t = 1
+
 export(NodePath) var player_node
 onready var player = get_node(player_node)
 
@@ -9,8 +12,17 @@ onready var board = get_node(board_node)
 var played_cards = 0
 
 onready var hand = $Hand
+onready var game = get_parent()
 
 signal end_turn
+signal end_game
+
+func _physics_process(_delta):
+	if (t % (1*60) == 0) and !process:
+		process = true
+		print("starting game after waiting")
+		_on_Player_end_turn()
+	t += 1
 
 func play_turn(num_cards, open_slots):
 	for i in range(0, num_cards):
@@ -28,14 +40,17 @@ func play_one(open_slots):
 		print("slot taken")
 	
 func _on_Player_end_turn():
-	hand.draw_to_five()
-	var open_slots = get_open_slots()
+	if process:
+		if game.turn_count >= 14:
+			return
+		hand.draw_to_five()
+		var open_slots = get_open_slots()
 	
-	if len(open_slots) >= 3:
-		play_turn(3, open_slots)
-	else:
-		play_one(open_slots)
-	end_turn()
+		if len(open_slots) >= 3:
+			play_turn(3, open_slots)
+		else:
+			play_one(open_slots)
+		end_turn()
 	
 func get_open_slots():
 	var open_slots = []
@@ -55,3 +70,15 @@ func end_turn():
 	hand.draw_to_five()
 	emit_signal("end_turn")
 	played_cards = 0
+
+func _on_Game_game_loaded():
+	if game.turn_count >= 14:
+		return
+	hand.draw_to_five()
+	var open_slots = get_open_slots()
+	
+	if len(open_slots) >= 3:
+		play_turn(3, open_slots)
+	else:
+		play_one(open_slots)
+	end_turn()

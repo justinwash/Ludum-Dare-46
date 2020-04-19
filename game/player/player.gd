@@ -3,6 +3,9 @@ extends Node2D
 export(NodePath) var opponent_node
 onready var opponent = get_node(opponent_node)
 
+export(NodePath) var board_node
+onready var board = get_node(board_node)
+
 var held_card
 
 var is_turn = false
@@ -17,10 +20,8 @@ func _ready():
 		var _holding_card = card.connect("holding_card", self, "_holding_card")
 		var _dropped_card = card.connect("dropped_card", self, "_dropped_card")
 		
-	end_turn()
-		
 func _process(_delta):
-	if played_cards > 1:
+	if is_turn and played_cards > 1:
 		played_cards = 0
 		end_turn()
 	
@@ -33,6 +34,10 @@ func _dropped_card(card):
 
 func _on_Opponent_end_turn():
 	hand.draw_to_five()
+	is_turn = true
 	
 func end_turn():
+	is_turn = false
 	emit_signal("end_turn")
+
+

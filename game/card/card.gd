@@ -19,7 +19,7 @@ func _input_event(viewport, event, shape_idx):
 		grabbed_offset = position - get_global_mouse_position()
 
 func _process(delta):
-	if Input.is_mouse_button_pressed(BUTTON_LEFT) and can_grab:
+	if Input.is_mouse_button_pressed(BUTTON_LEFT) and can_grab and owner.name == "Cards":
 		pressed = true
 		if !drag_origin:
 			drag_origin = position

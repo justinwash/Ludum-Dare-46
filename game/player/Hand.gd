@@ -6,10 +6,6 @@ onready var cards = $Cards
 onready var deck = get_node("../Deck")
 
 export var AI = false
-
-func _ready():
-	for i in range(0, cards.get_child_count()):
-			cards.get_children()[i].position = slots.get_children()[i].position
 		
 func _start_turn():
 	print("player turn started")

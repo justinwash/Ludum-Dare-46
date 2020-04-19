@@ -1,6 +1,7 @@
 extends Node
 
 onready var player = get_node("../Player")
+onready var opponent = get_node("../Opponent")
 
 onready var slots = [$Lanes/Lane1/Slots/Slot1,
 					$Lanes/Lane1/Slots/Slot2,
@@ -27,8 +28,15 @@ onready var slots = [$Lanes/Lane1/Slots/Slot1,
 					$Lanes/Lane5/Slots/Slot3,
 					$Lanes/Lane5/Slots/Slot4,
 					]
+					
+signal lane_lost
+signal board_loaded
+signal full_board
 
 func _ready():
 	for lane in $Lanes.get_children():
 		for slot in lane.get_node("Slots").get_children():
 			slot.player = player
+	
+	emit_signal("board_loaded")
+	
