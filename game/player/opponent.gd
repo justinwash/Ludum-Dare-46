@@ -60,7 +60,7 @@ func _on_Player_end_turn():
 		if len(open_slots) >= 3:
 			play_turn(3, open_slots)
 		elif len(open_slots) == 0:
-			emit_signal("end_game", "full board")
+			end_turn()
 			return
 		else:
 			play_turn(1, open_slots)

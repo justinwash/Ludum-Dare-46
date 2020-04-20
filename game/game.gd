@@ -62,6 +62,7 @@ func _end_game(reason):
 	if reason == "turn limit":
 		print("game ended: turn limit - you win!")
 		win_lose.get_node("Win").visible = true
+		win_lose.get_node("Win/Info").text = "The connection survived until the turn limit."
 		win_lose.get_node("Lose").visible = false
 	elif reason == "full board":
 		print("game ended: full board - you might win.")
@@ -75,13 +76,16 @@ func _end_game(reason):
 					opp_slots += 1
 		if player_slots >=  opp_slots:
 			win_lose.get_node("Win").visible = true
+			win_lose.get_node("Win/Info").text = "You had more active connections than your opponent."
 			win_lose.get_node("Lose").visible = false
 		else:
 			win_lose.get_node("Lose").visible = true
+			win_lose.get_node("Lose/Info").text = "You had less active connections than your opponent."
 			win_lose.get_node("Win").visible = false
 	elif reason == "lanes lost":
 		print("game ended: connection lost - you lose")
 		win_lose.get_node("Lose").visible = true
+		win_lose.get_node("Lose/Info").text = "You lost 2 communication lanes."
 		win_lose.get_node("Win").visible = false
 	else:
 		print("game ended: for no reason?")

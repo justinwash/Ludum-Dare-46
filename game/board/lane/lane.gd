@@ -8,9 +8,11 @@ var lost = false
 
 func _physics_process(_delta):
 	var status_good = false
+	
 	for slot in slots.get_children():
 		if slot.status_good == true:
 			status_good = true
+
 	if !status_good and !lost:
 		lost = true
 		

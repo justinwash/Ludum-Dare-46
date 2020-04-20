@@ -39,10 +39,6 @@ func _dropped_card(card):
 	held_card = null
 
 func _on_Opponent_end_turn():
-	var open_slots = get_open_slots()
-	if len(open_slots) == 0:
-		emit_signal("end_game", self, "full board")
-		return
 	hand.draw_to_five()
 	is_turn = true
 	
