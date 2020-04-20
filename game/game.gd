@@ -14,6 +14,7 @@ onready var opponent = $Opponent
 onready var board = $Board
 
 onready var win_lose = $Camera/UI/WinLose
+onready var theme_music = $Music
 
 func _ready():
 	player.connect("end_turn", self, "_increment_turn_count")
@@ -22,6 +23,7 @@ func _ready():
 	board.connect("full_board", self, "_full_board")
 	
 	get_tree().paused = false
+	theme_music.play()
 	
 	
 func _physics_process(delta):

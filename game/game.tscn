@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player/opponent.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://fonts/JetBrainsMono-ExtraBold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://popups/victory.png" type="Texture" id=8]
 [ext_resource path="res://popups/defeat.png" type="Texture" id=9]
+[ext_resource path="res://sounds/connection.ogg" type="AudioStream" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 5 )
@@ -243,6 +244,10 @@ text = "Play Again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -15.0
 [connection signal="end_turn" from="Opponent" to="Player" method="_on_Opponent_end_turn"]
 [connection signal="end_turn" from="Player" to="Opponent" method="_on_Player_end_turn"]
 [connection signal="button_up" from="Camera/UI/WinLose/Lose/Quit" to="." method="_on_Quit_button_up"]

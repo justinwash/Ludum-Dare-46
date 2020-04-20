@@ -44,10 +44,10 @@ __meta__ = {
 
 [node name="PlacementSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 3 )
-volume_db = -15.0
+volume_db = -25.0
 
 [node name="DestroySound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 4 )
-volume_db = -10.0
+volume_db = -25.0
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

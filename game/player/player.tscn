@@ -97,5 +97,5 @@ __meta__ = {
 
 [node name="PickupSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource( 1 )
-volume_db = -20.0
+volume_db = -35.0
 [connection signal="button_up" from="Button" to="Button" method="_on_Button_button_up"]
