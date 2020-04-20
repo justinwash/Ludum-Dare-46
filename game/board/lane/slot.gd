@@ -60,10 +60,6 @@ func accept_card(card):
 	else:
 		set_status_good(false)
 		
-	var open_slots = get_open_slots()
-	if len(open_slots) == 0:
-		board.emit_signal("full_board")
-	
 	do_effects(card_to_add)
 		
 func get_open_slots():
@@ -84,40 +80,48 @@ func set_status_good(status):
 		
 func do_effects(card):
 	if card.effects.left:
-		var slot_should_remove = get_node("../../../Lane"+str(lane-1)+"/Slots/Slot"+str(slot))
-		if slot_should_remove:
-			if slot_should_remove.card.get_child_count() > 0:
-				var card_to_remove = slot_should_remove.card.get_child(0)
-				if card_to_remove.side != card.side:
-					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
-					destroy_sound.play()
+		if lane - 1 > 0:
+			var slot_should_remove = get_node("../../../Lane"+str(lane-1)+"/Slots/Slot"+str(slot))
+			if slot_should_remove:
+				if slot_should_remove.card.get_child_count() > 0:
+					var card_to_remove = slot_should_remove.card.get_child(0)
+					if card_to_remove.side != card.side:
+						slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+						destroy_sound.play()
 			
 	if card.effects.up:
-		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot+1))
-		if slot_should_remove:
-			if slot_should_remove.card.get_child_count() > 0:
-				var card_to_remove = slot_should_remove.card.get_child(0)
-				if card_to_remove.side != card.side:
-					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
-					destroy_sound.play()
+		if slot + 1 < 5:
+			var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot+1))
+			if slot_should_remove:
+				if slot_should_remove.card.get_child_count() > 0:
+					var card_to_remove = slot_should_remove.card.get_child(0)
+					if card_to_remove.side != card.side:
+						slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+						destroy_sound.play()
 					
 		
 	if card.effects.right:
-		var slot_should_remove = get_node("../../../Lane"+str(lane+1)+"/Slots/Slot"+str(slot))
-		if slot_should_remove:
-			if slot_should_remove.card.get_child_count() > 0:
-				var card_to_remove = slot_should_remove.card.get_child(0)
-				if card_to_remove.side != card.side:
-					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
-					destroy_sound.play()
+		if lane + 1 < 6:
+			var slot_should_remove = get_node("../../../Lane"+str(lane+1)+"/Slots/Slot"+str(slot))
+			if slot_should_remove:
+				if slot_should_remove.card.get_child_count() > 0:
+					var card_to_remove = slot_should_remove.card.get_child(0)
+					if card_to_remove.side != card.side:
+						slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+						destroy_sound.play()
 					
 			
 	if card.effects.down:
-		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot-1))
-		if slot_should_remove:
-			if slot_should_remove.card.get_child_count() > 0:
-				var card_to_remove = slot_should_remove.card.get_child(0)
-				if card_to_remove.side != card.side:
-					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
-					destroy_sound.play()
+		if slot - 1 > 0:
+			var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot-1))
+			if slot_should_remove:
+				if slot_should_remove.card.get_child_count() > 0:
+					var card_to_remove = slot_should_remove.card.get_child(0)
+					if card_to_remove.side != card.side:
+						slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+						destroy_sound.play()
+						
+	var open_slots = get_open_slots()
+	if len(open_slots) == 0:
+		board.emit_signal("full_board")
 					

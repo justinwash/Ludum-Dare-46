@@ -13,7 +13,8 @@ var played_cards = 0
 
 onready var hand = $Hand
 onready var game = get_parent()
-onready var timer = $Timer
+onready var timer = $DelayTimer
+onready var turn_timer = $TurnTimer
 
 signal end_turn
 signal end_game
@@ -47,6 +48,10 @@ func play_one(open_slots, num_cards):
 	
 func _on_Player_end_turn():
 	if process:
+		turn_timer.connect("timeout", self, "end_turn")
+		turn_timer.set_wait_time(5)
+		turn_timer.start()
+		
 		if game.turn_count >= 14:
 			return
 		hand.draw_to_five()
@@ -75,6 +80,7 @@ func get_random_slot(open_slots):
 	return open_slots[rand]
 	
 func end_turn():
+	turn_timer.disconnect("timer")
 	hand.draw_to_five()
 	emit_signal("end_turn")
 	played_cards = 0

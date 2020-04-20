@@ -86,7 +86,9 @@ scale = Vector2( 0.435255, 0.435255 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="Timer" type="Timer" parent="."]
+[node name="DelayTimer" type="Timer" parent="."]
+
+[node name="TurnTimer" type="Timer" parent="."]
 
 [editable path="StateMachine"]
 

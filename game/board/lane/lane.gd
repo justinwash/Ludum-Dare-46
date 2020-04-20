@@ -13,6 +13,10 @@ func _physics_process(_delta):
 			status_good = true
 	if !status_good and !lost:
 		lost = true
+		
+		for slot in slots.get_children():
+			slots.remove_child(slot)
+			
 		timer.connect("timeout", self, "_lane_lost")
 		timer.set_wait_time(0.5)
 		timer.start()
