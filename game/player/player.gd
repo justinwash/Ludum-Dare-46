@@ -16,6 +16,7 @@ var played_cards = 0
 signal end_turn
 
 onready var hand = $Hand
+onready var pickup_sound = $Sounds/PickupSound
 
 func _ready():
 	for card in $Deck.cards.get_children():
@@ -31,6 +32,7 @@ func _process(_delta):
 func _holding_card(card):
 	if is_turn:
 		if !held_card:
+			pickup_sound.play()
 			held_card = card
 		
 func _dropped_card(card):

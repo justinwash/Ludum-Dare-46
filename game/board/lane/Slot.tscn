@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://card/placeholders/placeholder-open.png" type="Texture" id=1]
 [ext_resource path="res://board/lane/slot.gd" type="Script" id=2]
+[ext_resource path="res://sounds/card_place.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/card_destroy.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 94.1183, 94.8407 )
@@ -37,5 +39,15 @@ color = Color( 0, 1, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="PlacementSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 3 )
+volume_db = -15.0
+
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 4 )
+volume_db = -10.0
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

@@ -13,7 +13,7 @@ export var side = "player"
 
 onready var effects = $Effects
 onready var player = get_node("../../../")
-	
+
 func _input_event(viewport, event, shape_idx):
 	if player.is_turn:
 		if event is InputEventMouseButton:

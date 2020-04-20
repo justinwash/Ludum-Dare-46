@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://sounds/card_pickup.wav" type="AudioStream" id=1]
 [ext_resource path="res://card/placeholders/placeholder-open.png" type="Texture" id=2]
 [ext_resource path="res://player/player.gd" type="Script" id=3]
 [ext_resource path="res://player/Hand.gd" type="Script" id=4]
@@ -91,4 +92,10 @@ script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource( 1 )
+volume_db = -20.0
 [connection signal="button_up" from="Button" to="Button" method="_on_Button_button_up"]

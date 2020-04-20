@@ -13,6 +13,8 @@ onready var card = $Card
 onready var lane = int(owner.get_name().substr(4))
 onready var slot = int(get_name().substr(4))
 onready var board = owner.get_owner()
+onready var placement_sound = $Sounds/PlacementSound
+onready var destroy_sound = $Sounds/DestroySound
 
 func _ready():
 	var _player_turn_end = player_node.connect("end_turn", self, "_player_turn_end")
@@ -50,6 +52,7 @@ func accept_card(card):
 	card_to_add.input_pickable = false
 	card_to_add.set_scale(Vector2(1, 1))
 	card_to_add.position = Vector2(0, 0)
+	placement_sound.play()
 	if card_to_add.side == "player":
 		set_status_good(true)
 		player.held_card = null
@@ -87,6 +90,7 @@ func do_effects(card):
 				var card_to_remove = slot_should_remove.card.get_child(0)
 				if card_to_remove.side != card.side:
 					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+					destroy_sound.play()
 			
 	if card.effects.up:
 		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot+1))
@@ -95,6 +99,8 @@ func do_effects(card):
 				var card_to_remove = slot_should_remove.card.get_child(0)
 				if card_to_remove.side != card.side:
 					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+					destroy_sound.play()
+					
 		
 	if card.effects.right:
 		var slot_should_remove = get_node("../../../Lane"+str(lane+1)+"/Slots/Slot"+str(slot))
@@ -103,6 +109,8 @@ func do_effects(card):
 				var card_to_remove = slot_should_remove.card.get_child(0)
 				if card_to_remove.side != card.side:
 					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+					destroy_sound.play()
+					
 			
 	if card.effects.down:
 		var slot_should_remove = get_node("../../../Lane"+str(lane)+"/Slots/Slot"+str(slot-1))
@@ -111,3 +119,5 @@ func do_effects(card):
 				var card_to_remove = slot_should_remove.card.get_child(0)
 				if card_to_remove.side != card.side:
 					slot_should_remove.card.remove_child(slot_should_remove.card.get_child(0))
+					destroy_sound.play()
+					
